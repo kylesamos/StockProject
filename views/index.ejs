@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>EJS Engine</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+        <h1>Add Stock Purchase</h1>
+        <form method="post" action="/purchases/post">
+          <div class="form-group">
+            <label for="item">Stock Ticker</label>
+            <input type="text" class="form-control" id="ticker" name="ticker">
+          </div>
+          <div class="form-group">
+            <label for="item">Amount to invest</label>
+            <input type="text" class="form-control" id="amount" name="amount">
+          </div>
+          <button type="submit" class="btn btn-default">Submit Purchase</button>
+        </form>
+    </div>
+  </body>
+</html>
