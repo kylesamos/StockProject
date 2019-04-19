@@ -24,7 +24,6 @@ StockPurchaseRouter.route('/post').post(function (req, res) {
 			res.render('purchasesummary', {
 				purchase: purchase
 			});
-//else 
 	});
 });
 
