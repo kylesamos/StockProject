@@ -13,10 +13,8 @@ StockPurchaseRouter.route('/post').post(function (req, res) {
 	var uri = 'http://localhost:3000/purchases/purchasestock/' + req.body.ticker + '&' + req.body.amount;
 	
 	request.get(uri, (err, response, body) => {
-		console.log(err, response.status, 'this is an error2');
 		
 			var purchase = JSON.parse(body);
-			console.log(body)
 			if (purchase.error)
 				res.render('purchasefailure', {
 				error: purchase.error
@@ -42,7 +40,7 @@ StockPurchaseRouter.route('/purchaseStock/:ticker&:amount').get(function (req, r
 		});
 
 		if (shares == 0)
-			return res.status(400).send("You don't have enough money to buy a share");
+			return res.status(400).send({ error: "You don't have enough money to buy a share"});
 		
 		purchase.save()
 		   .then(purchase => {
@@ -60,7 +58,7 @@ StockPurchaseRouter.route('/getPurchases').get(function (req, res) {
 	Purchase.find({}, function(err, purchases) {
 		return res.send(purchases);
 	}).catch(err => {
-	   res.status(400).send("The Purchases were unable to be retrieved");
+	   res.status(400).send({ error: "The Purchases were unable to be retrieved"});
 	   });;
 	
 });
@@ -70,9 +68,9 @@ StockPurchaseRouter.route('/getPurchaseById/:id').get(function (req, res) {
 	Purchase.findById(req.params.id, function (err, purchase) {
 		return res.send(purchase);
 	}).catch(err => {
-		   res.status(400).send("The Purchase was unable to be retrieved");
-		   });;
-	
+	   res.status(400).send({ error: "The Purchases were unable to be retrieved"});
+		});;
+
 });
 
 StockPurchaseRouter.route('/getPurchasesByTicker/:ticker').get(function (req, res) {
@@ -80,9 +78,9 @@ StockPurchaseRouter.route('/getPurchasesByTicker/:ticker').get(function (req, re
 	Purchase.find({ticker: req.params.ticker}, function(err, purchases) {
 		return res.send(purchases);
 	}).catch(err => {
-	   res.status(400).send("The Purchases were unable to be retrieved");
-	   });;
-	
+		res.status(400).send({ error: "The Purchases were unable to be retrieved"});
+		});;
+
 });
 
 module.exports = StockPurchaseRouter;
