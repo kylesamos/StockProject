@@ -9,9 +9,9 @@ const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
 
-mongoose.connect(`mongodb://localhost/StockProject`, { useNewUrlParser: true })
-   .then(() => {
-	 console.log('Database connection successful')
+mongoose.connect(`mongodb+srv://kylesamos:MyInterviewProject@interviewproject-ipm0d.mongodb.net/StockPurchase?retryWrites=trueCopy`, { useNewUrlParser: true }, function (err, db) {
+
+	 console.log('Database connection successful' )
    })
    .catch(err => {
 	   console.log(err)
@@ -20,7 +20,6 @@ mongoose.connect(`mongodb://localhost/StockProject`, { useNewUrlParser: true })
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use('/purchases', StockPurchaseRouter);
