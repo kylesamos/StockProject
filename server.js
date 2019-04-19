@@ -7,8 +7,9 @@ const path = require('path');
 const StockPurchaseRouter = require('./routes/StockPurchaseRouter');
 const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
 
-mongoose.connect(`mongodb://localhost/StockProject`)
+mongoose.connect(`mongodb://localhost/StockProject`, { useNewUrlParser: true })
    .then(() => {
 	 console.log('Database connection successful')
    })
@@ -17,6 +18,8 @@ mongoose.connect(`mongodb://localhost/StockProject`)
 	 console.error('Database connection error')
    })
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
